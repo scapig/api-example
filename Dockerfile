@@ -1,8 +1,8 @@
 FROM openjdk:8
 
-COPY target/universal/tapi-hello-*.tgz .
+COPY target/universal/scapig-hello-world-api-*.tgz .
 COPY start-docker.sh .
 RUN chmod +x start-docker.sh
-RUN tar xvf tapi-hello-*.tgz
+RUN tar xvf scapig-hello-world-api-*.tgz
 
-EXPOSE 8080
+EXPOSE 9000

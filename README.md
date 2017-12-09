@@ -1,4 +1,4 @@
-## tapi-hello
+## scapig-hello-world-api
 
 ## Building
 ``
@@ -8,10 +8,10 @@ sbt clean test it:test component:test
 ## Packaging
 ``
 sbt universal:package-zip-tarball
-docker build -t tapi-hello .
+docker build -t scapig-hello-world-api .
 ``
 
 ## Running
 ``
-docker run -p8080:8080 -i -a stdin -a stdout -a stderr tapi-hello sh start-docker.sh
+docker run -p9000:9000 -i -a stdin -a stdout -a stderr scapig-hello-world-api sh start-docker.sh
 ``

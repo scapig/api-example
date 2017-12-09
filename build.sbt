@@ -3,7 +3,7 @@ import sbt.Keys._
 import sbt.Tests.{Group, SubProcess}
 import sbt._
 
-name := "tapi-hello"
+name := "scapig-hello-world-api"
 
 version := "1.0"
 
