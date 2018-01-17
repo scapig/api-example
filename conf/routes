@@ -2,7 +2,9 @@
 GET     /assets/*file               controllers.Assets.versioned(path="/public", file: Asset)
 
 GET     /world                      @controllers.HelloController.world()
-
 GET     /application                @controllers.HelloController.application()
+GET     /user                       @controllers.HelloController.user()
 
-GET     /user                      @controllers.HelloController.user()
+GET     /sandbox/world              @controllers.SandboxHelloController.world()
+GET     /sandbox/application        @controllers.SandboxHelloController.application()
+GET     /sandbox/user               @controllers.SandboxHelloController.user()

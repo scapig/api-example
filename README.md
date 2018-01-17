@@ -13,5 +13,5 @@ docker build -t scapig-hello-world-api .
 
 ## Running
 ``
-docker run -p9000:9000 -i -a stdin -a stdout -a stderr scapig-hello-world-api sh start-docker.sh
+docker run -p9990:9000 -i -a stdin -a stdout -a stderr scapig-hello-world-api sh start-docker.sh
 ``

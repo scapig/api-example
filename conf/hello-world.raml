@@ -1,0 +1,121 @@
+#%RAML 1.0
+---
+
+title: Hello API
+description: Hello API
+version: 1.0
+protocols: [ HTTPS ]
+baseUri: https://api.scapig.com/
+
+(annotations.context): hello
+(annotations.serviceUrl): http://scapig-hello-world-api.docker:9990
+(annotations.status): PUBLISHED
+(annotations.scopes):
+  -
+    key: "read:hello"
+    name: "Say Hello"
+
+documentation:
+ - title: Overview
+   content: This is an Hello World API
+
+mediaType: [ application/json, application/hal+json ]
+
+uses:
+  sec: https://bitbucket.org/tomvdv59/raml-files/raw/6eceac84b37317e438c05e2f835c1a92f0a8b0e9/tapi/securitySchemes.raml
+  headers: https://bitbucket.org/tomvdv59/raml-files/raw/6eceac84b37317e438c05e2f835c1a92f0a8b0e9/tapi/headers.raml
+  annotations: https://bitbucket.org/tomvdv59/raml-files/raw/6eceac84b37317e438c05e2f835c1a92f0a8b0e9/tapi/annotations.raml
+
+/hello:
+  /world:
+    get:
+      displayName: Open Endpoint
+      description: This is an open endpoint
+      is: [headers.acceptHeader]
+      responses:
+        200:
+          description: Hello World
+          body:
+            application/json:
+              example: |
+                {
+                  "message": "Hello World"
+                }
+              type: |
+                {
+                  "$schema": "http://json-schema.org/draft-04/schema#",
+                  "description": "Hello World",
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "required": ["message"]
+                }
+  /application:
+    get:
+      displayName: Application-restricted Endpoint
+      description: This is an application-restricted endpoint
+      is: [headers.acceptHeader]
+      securedBy: [ sec.x-application ]
+      headers:
+        Authorization:
+          description: Server Token
+          type: string
+          required: true
+          example: Bearer <BEARER_TOKEN>
+      responses:
+        200:
+          description: Hello Application
+          body:
+            application/json:
+              example: |
+                {
+                  "message": "Hello Application"
+                }
+              type: |
+                {
+                  "$schema": "http://json-schema.org/draft-04/schema#",
+                  "description": "Hello Application",
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "required": ["message"]
+                }
+  /user:
+    get:
+      displayName: User-restricted Endpoint
+      description: This is a user-restricted endpoint
+      is: [headers.acceptHeader]
+      securedBy: [ sec.oauth_2_0: { scopes: [ "read:hello" ] } ]
+      headers:
+        Authorization:
+          description: OAuth 2.0 Bearer Token with the read:hello scope.
+          type: string
+          required: true
+          example: Bearer <BEARER_TOKEN>
+      responses:
+        200:
+          description: Hello User
+          body:
+            application/json:
+              example: |
+                {
+                  "message": "Hello User"
+                }
+              type: |
+                {
+                  "$schema": "http://json-schema.org/draft-04/schema#",
+                  "description": "Hello User",
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "required": ["message"]
+                }
