@@ -1,9 +1,9 @@
 FROM openjdk:8
 
-COPY target/universal/scapig-hello-world-api-*.tgz .
+COPY target/universal/api-example-*.tgz .
 COPY start-docker.sh .
 RUN chmod +x start-docker.sh
-RUN tar xvf scapig-hello-world-api-*.tgz
+RUN tar xvf api-example-*.tgz
 EXPOSE 9990
 
 CMD ["sh", "start-docker.sh"]
