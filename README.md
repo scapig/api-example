@@ -11,7 +11,14 @@ sbt universal:package-zip-tarball
 docker build -t api-example .
 ``
 
+## Publishing
+``
+docker tag api-example scapig/api-example:VERSION
+docker login
+docker push scapig/api-example:VERSION
+``
+
 ## Running
 ``
-docker run -p9990:9990 -i -a stdin -a stdout -a stderr api-example sh start-docker.sh
+docker run -p9021:9021 -d scapig/api-example:VERSION
 ``
